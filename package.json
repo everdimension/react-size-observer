@@ -1,0 +1,40 @@
+{
+  "name": "react-size-observer",
+  "version": "0.0.1",
+  "description": "A library to help you create responsive components by detecting their size using ResizeObserver API",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "keywords": [
+    "container",
+    "queries",
+    "ResizeObserver",
+    "responsive",
+    "view",
+    "component",
+    "react"
+  ],
+  "author": "everdimension <everdimension@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/everdimension/react-size-observer.git"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.2",
+    "jest": "^25.3.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "typescript": "^3.8.3"
+  }
+}
