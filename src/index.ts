@@ -1,4 +1,10 @@
-import { useLayoutEffect, useState, useRef, useEffect } from 'react';
+import {
+  useLayoutEffect,
+  useCallback,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 
 const isSupported = 'ResizeObserver' in window;
 
@@ -34,16 +40,12 @@ function useLayoutEffectOnRefChange(
   });
 }
 
-// interface Props<T> {
-//   render: (options: { ref: React.Ref<T>; width: number }) => React.ReactNode;
-// }
 interface Props<T> {
   ref: React.RefObject<T>;
 }
 
 export function useSizeObserver<T>({ ref }: Props<T>) {
   const [width, setWidth] = useState(0);
-  // const elementRef = useRef<T>(null);
 
   /**
    * Lazily initialize observer
@@ -79,18 +81,20 @@ export function useSizeObserver<T>({ ref }: Props<T>) {
     return observerRef.current;
   }
 
-  useLayoutEffectOnRefChange(ref, () => {
-    if (!isSupported || !ref.current) {
-      return;
-    }
+  useLayoutEffectOnRefChange(
+    ref,
+    useCallback(() => {
+      if (!isSupported || !ref.current) {
+        return;
+      }
 
-    const node = ref.current;
-    getObserver().observe(node);
-    return () => {
-      console.log('unobserving?...');
-      getObserver().unobserve(node);
-    };
-  });
+      const node = ref.current;
+      getObserver().observe(node);
+      return () => {
+        getObserver().unobserve(node);
+      };
+    }, []),
+  );
 
   return {
     width,
